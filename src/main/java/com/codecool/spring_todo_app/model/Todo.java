@@ -32,4 +32,14 @@ public class Todo {
     }
 
 
+    public void toggleStatus (boolean isComplete) {
+        if (isComplete) {
+            this.status = Status.COMPLETE;
+        } else {
+            this.status = Status.ACTIVE;
+        }
+    }
+
+
+
 }
