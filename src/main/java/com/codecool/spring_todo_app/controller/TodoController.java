@@ -31,13 +31,13 @@ public class TodoController {
             todosToReturn = todoRepository.getAllTodos();
         } else {
 
-            if (status == "active") {
+            if (status.equals("active")) {
 
-                todosToReturn = todoRepository.getAllByStatus(Status.ACTIVE);
+                todosToReturn = todoRepository.getAllByStatusOrderById(Status.ACTIVE);
 
             } else {
 
-                todosToReturn = todoRepository.getAllByStatus(Status.COMPLETE);
+                todosToReturn = todoRepository.getAllByStatusOrderById(Status.COMPLETE);
 
             }
         }
@@ -78,7 +78,7 @@ public class TodoController {
     @DeleteMapping("/todos/completed")
     public String deletedCompleted() {
 
-        List<Todo> completedTasks = todoRepository.getAllByStatus(Status.COMPLETE);
+        List<Todo> completedTasks = todoRepository.getAllByStatusOrderById(Status.COMPLETE);
         todoRepository.deleteAll(completedTasks);
 
         return SUCCESS;
@@ -104,6 +104,24 @@ public class TodoController {
         Todo todo = todoRepository.findById(id);
         todoRepository.delete(todo);
         return SUCCESS;
+
+    }
+
+    @PutMapping("todos/{id}")
+    public String updateById(@PathVariable("id") long id, @RequestParam Map<String, String> params) {
+
+        Todo todo = todoRepository.findById(id);
+        String newTitle = params.get("todo-title");
+        todo.setTitle(newTitle);
+        todoRepository.save(todo);
+        return SUCCESS;
+
+    }
+
+    @GetMapping("/todos/{id}")
+    public Todo getById(@PathVariable("id") long id) {
+
+        return todoRepository.findById(id);
 
     }
 }

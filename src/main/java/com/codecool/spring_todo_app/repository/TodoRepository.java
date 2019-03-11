@@ -14,7 +14,8 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     @Query("SELECT t from Todo t ORDER BY id")
     List<Todo> getAllTodos();
 
-    List<Todo> getAllByStatus(Status status);
+    List<Todo> getAllByStatusOrderById(Status status);
 
     Todo findById(long id);
 }
+
