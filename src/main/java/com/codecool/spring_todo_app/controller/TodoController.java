@@ -97,4 +97,13 @@ public class TodoController {
 
         return SUCCESS;
     }
+
+    @DeleteMapping("todos/{id}")
+    public String deleteById(@PathVariable("id") long id) {
+
+        Todo todo = todoRepository.findById(id);
+        todoRepository.delete(todo);
+        return SUCCESS;
+
+    }
 }
