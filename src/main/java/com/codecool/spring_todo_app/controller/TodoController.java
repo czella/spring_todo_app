@@ -29,10 +29,17 @@ public class TodoController {
         if (status == null || status.isEmpty()) {
 
             todosToReturn = todoRepository.getAllTodos();
-            System.out.println(todosToReturn);
         } else {
 
-            todosToReturn = todoRepository.getAllByStatus(status);
+            if (status == "active") {
+
+                todosToReturn = todoRepository.getAllByStatus(Status.ACTIVE);
+
+            } else {
+
+                todosToReturn = todoRepository.getAllByStatus(Status.COMPLETE);
+
+            }
         }
         JSONArray arr = new JSONArray();
         for (Todo todo : todosToReturn) {
@@ -66,6 +73,16 @@ public class TodoController {
         todo.toggleStatus(completed);
         todoRepository.save(todo);
         return SUCCESS;
+    }
+
+    @DeleteMapping("/todos/completed")
+    public String deletedCompleted() {
+
+        List<Todo> completedTasks = todoRepository.getAllByStatus(Status.COMPLETE);
+        todoRepository.deleteAll(completedTasks);
+
+        return SUCCESS;
+
     }
 
 
