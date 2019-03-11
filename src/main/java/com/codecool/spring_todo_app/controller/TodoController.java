@@ -85,5 +85,16 @@ public class TodoController {
 
     }
 
+    @PutMapping("/todos/toggle_all")
+    public String toggleAll(@RequestParam Map<String, String> params) {
 
+        List<Todo > todos = todoRepository.getAllTodos();
+        String complete = params.get("toggle-all");
+        for (Todo todo: todos) {
+            todo.toggleStatus(complete.equals("true"));
+            todoRepository.save(todo);
+        }
+
+        return SUCCESS;
+    }
 }
