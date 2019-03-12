@@ -55,6 +55,7 @@ class Controller {
         req.open(method, endpoint);
         if (method === Controller.POST || method === Controller.PUT) {
             req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            req.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('accessToken') );
         }
         req.send(params);
     }
