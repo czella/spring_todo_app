@@ -49,11 +49,9 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.POST, "/list").authenticated()
                 .antMatchers(HttpMethod.POST, "/addTodo").hasAuthority("read:admin")
-                .antMatchers(HttpMethod.PUT, "/todos/{id}/toggle_status").hasAuthority("read:admin")
-                .antMatchers(HttpMethod.DELETE, "/todos/completed").hasAuthority("read:admin")
-                .antMatchers(HttpMethod.PUT, "/todos/toggle_all").hasAuthority("read:admin")
-                .antMatchers(HttpMethod.DELETE, "todos/:id").hasAuthority("read:admin")
-                .antMatchers(HttpMethod.PUT, "todos/:id").hasAuthority("read:admin");
+                .antMatchers( HttpMethod.POST,"/todos/**").hasAuthority("read:admin")
+                .antMatchers( HttpMethod.PUT,"/todos/**").hasAuthority("read:admin")
+                .antMatchers( HttpMethod.DELETE,"/todos/**").hasAuthority("read:admin");
 
 
 
