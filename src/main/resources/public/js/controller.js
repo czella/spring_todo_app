@@ -53,7 +53,7 @@ class Controller {
             console.log("Request failed for " + endpoint + " error: " + err);
         });
         req.open(method, endpoint);
-        if (method === Controller.POST || method === Controller.PUT) {
+        if (method === Controller.POST || method === Controller.PUT || method === Controller.DELETE) {
             req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             req.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('accessToken') );
         }

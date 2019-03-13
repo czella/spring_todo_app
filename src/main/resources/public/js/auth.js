@@ -1,5 +1,4 @@
 window.addEventListener('load', function() {
-  var Controller = new Controller();
   var idToken;
   var accessToken;
   var expiresAt;
@@ -9,7 +8,7 @@ window.addEventListener('load', function() {
     clientID: 'Yb7DzwMSe3D9AXnSCxtBxs8hokh2Nx0J',
     responseType: 'token id_token',
     audience: 'https://todoapp/api',
-    scope: 'openid',
+    scope: 'openid read:admin',
     redirectUri: 'http://localhost:8080/'
   });
 
@@ -66,6 +65,7 @@ window.addEventListener('load', function() {
     );
     accessToken = authResult.accessToken;
     idToken = authResult.idToken;
+    location.reload();
   }
 
   function renewTokens() {
